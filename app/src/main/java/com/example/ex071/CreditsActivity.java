@@ -1,5 +1,6 @@
 package com.example.ex071;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -9,23 +10,25 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
+import android.widget.TextView;
 
 public class CreditsActivity extends AppCompatActivity {
+    TextView answerTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_credits);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        answerTv = (TextView) findViewById(R.id.answerTv);
+
+        Intent gi = getIntent();
+        double answer = gi.getDoubleExtra("answer", 0);
+        answerTv.setText("The last calculation answer is: " + answer);
+    }
+
+    public void goToMain(View view) {
+        Intent si = new Intent(this, MainActivity.class);
+        startActivity(si);
     }
 }
