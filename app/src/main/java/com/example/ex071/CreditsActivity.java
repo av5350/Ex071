@@ -28,7 +28,6 @@ public class CreditsActivity extends AppCompatActivity {
     }
 
     public void goToMain(View view) {
-        Intent si = new Intent(this, MainActivity.class);
-        startActivity(si);
+        finish();
     }
 }

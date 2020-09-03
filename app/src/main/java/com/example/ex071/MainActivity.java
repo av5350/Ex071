@@ -6,9 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    double answer = 0;
+    double answer;
+    double secNum;
+    char sign;
 
     EditText mathExercise;
 
@@ -19,6 +22,43 @@ public class MainActivity extends AppCompatActivity {
 
         mathExercise = (EditText) findViewById(R.id.mathExercise);
 
+        answer = 0;
+        secNum = 0;
+        sign = 'F';
+    }
+
+    public void makeCalculation(char newSign){
+        String inputedNum = mathExercise.getText().toString();
+        if (!inputedNum.equals("")) {
+            secNum = Double.parseDouble(inputedNum);
+            switch (sign) {
+                // the first time number
+                case 'F':
+                    answer = secNum;
+                    break;
+                case '+':
+                    answer = answer + secNum;
+                    break;
+                case '-':
+                    answer = answer - secNum;
+                    break;
+                case '*':
+                    answer = answer * secNum;
+                    break;
+                case '/':
+                    // If the user wants to div by 0 - cant do that!
+                    if (secNum == 0){
+                        Toast.makeText(this, "Cant divide by 0!", Toast.LENGTH_SHORT).show();
+                        answer = 0;
+                    }
+                    else {
+                        answer = answer / secNum;
+                    }
+                    break;
+            }
+            sign = newSign;
+            mathExercise.setText("");
+        }
     }
 
     public void goToCredits(View view) {
@@ -28,35 +68,30 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void add(View view) {
-        String inputedNum = mathExercise.getText().toString();
-        answer = answer + Float.parseFloat(inputedNum);
-        mathExercise.setText("");
+        makeCalculation('+');
     }
 
     public void restartValues(View view) {
+        sign = 'F';
+        secNum = 0;
         answer = 0;
         mathExercise.setText("");
     }
 
     public void sub(View view) {
-        String inputedNum = mathExercise.getText().toString();
-        answer = answer - Float.parseFloat(inputedNum);
-        mathExercise.setText("");
+        makeCalculation('-');
     }
 
     public void mul(View view) {
-        String inputedNum = mathExercise.getText().toString();
-        answer = answer * Float.parseFloat(inputedNum);
-        mathExercise.setText("");
+        makeCalculation('*');
     }
 
     public void div(View view) {
-        String inputedNum = mathExercise.getText().toString();
-        answer = answer / Float.parseFloat(inputedNum);
-        mathExercise.setText("");
+        makeCalculation('/');
     }
 
     public void showResult(View view) {
+        makeCalculation('=');
         mathExercise.setText("" + answer);
     }
 }
