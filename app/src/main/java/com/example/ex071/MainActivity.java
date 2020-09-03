@@ -30,10 +30,33 @@ public class MainActivity extends AppCompatActivity {
     public void add(View view) {
         String inputedNum = mathExercise.getText().toString();
         answer = answer + Float.parseFloat(inputedNum);
+        mathExercise.setText("");
     }
 
     public void restartValues(View view) {
         answer = 0;
         mathExercise.setText("");
+    }
+
+    public void sub(View view) {
+        String inputedNum = mathExercise.getText().toString();
+        answer = answer - Float.parseFloat(inputedNum);
+        mathExercise.setText("");
+    }
+
+    public void mul(View view) {
+        String inputedNum = mathExercise.getText().toString();
+        answer = answer * Float.parseFloat(inputedNum);
+        mathExercise.setText("");
+    }
+
+    public void div(View view) {
+        String inputedNum = mathExercise.getText().toString();
+        answer = answer / Float.parseFloat(inputedNum);
+        mathExercise.setText("");
+    }
+
+    public void showResult(View view) {
+        mathExercise.setText("" + answer);
     }
 }
