@@ -73,7 +73,7 @@
             android:layout_weight="1"
             android:background="#FFFFFF"
             android:onClick="goToMain"
-            app:srcCompat="@drawable/return_icon1" />
+            app:srcCompat="@drawable/return_icon" />
 
         <Space
             android:layout_width="match_parent"

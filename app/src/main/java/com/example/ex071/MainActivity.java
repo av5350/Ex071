@@ -9,8 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    double answer;
-    double secNum;
+    double answer, secNum;
     char sign;
 
     EditText mathExercise;
