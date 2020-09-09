@@ -10,7 +10,10 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     double answer, secNum;
+
     char sign;
+
+    boolean hasZero;
 
     EditText mathExercise;
 
@@ -23,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
         answer = 0;
         secNum = 0;
+        hasZero = false;
         sign = 'F';
     }
 
@@ -48,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
                     // If the user wants to div by 0 - cant do that!
                     if (secNum == 0){
                         Toast.makeText(this, "Cant divide by 0!", Toast.LENGTH_SHORT).show();
+                        hasZero = true;
                         answer = 0;
                     }
                     else {
@@ -63,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
     public void goToCredits(View view) {
         Intent si = new Intent(this, CreditsActivity.class);
         si.putExtra("answer", answer);
+        si.putExtra("hasZero", hasZero);
         startActivity(si);
     }
 
@@ -74,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
         sign = 'F';
         secNum = 0;
         answer = 0;
+        hasZero = false;
         mathExercise.setText("");
     }
 
@@ -92,7 +99,10 @@ public class MainActivity extends AppCompatActivity {
     public void showResult(View view) {
         makeCalculation('=');
 
-        if ((float)((int)answer) == answer) {
+        if (hasZero) {
+            mathExercise.setText("Error!");
+        }
+        else if ((float)((int)answer) == answer) {
             mathExercise.setText("" + (int)answer);
         }
         else {

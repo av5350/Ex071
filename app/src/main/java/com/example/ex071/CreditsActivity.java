@@ -15,6 +15,10 @@ import android.widget.TextView;
 public class CreditsActivity extends AppCompatActivity {
     TextView answerTv;
 
+    boolean hasZero;
+
+    double answer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,8 +27,15 @@ public class CreditsActivity extends AppCompatActivity {
         answerTv = (TextView) findViewById(R.id.answerTv);
 
         Intent gi = getIntent();
-        double answer = gi.getDoubleExtra("answer", 0);
-        answerTv.setText("The last calculation answer is: " + answer);
+        answer = gi.getDoubleExtra("answer", 0);
+        hasZero = gi.getBooleanExtra("hasZero", false);
+
+        if (hasZero){
+            answerTv.setText("The last calculation answer is: Error");
+        }
+        else {
+            answerTv.setText("The last calculation answer is: " + answer);
+        }
     }
 
     public void goToMain(View view) {
