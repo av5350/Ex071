@@ -91,6 +91,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void showResult(View view) {
         makeCalculation('=');
-        mathExercise.setText("" + answer);
+
+        if ((float)((int)answer) == answer) {
+            mathExercise.setText("" + (int)answer);
+        }
+        else {
+            mathExercise.setText("" + answer);
+        }
     }
 }
